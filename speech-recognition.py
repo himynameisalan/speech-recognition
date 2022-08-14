@@ -44,10 +44,12 @@ while 1:
 
             # Using google to recognize audio
             text = r.recognize_google(audio, language="zh-TW")
-            # MyText = MyText.lower()
+            # text = text.lower()
 
+            # Keywords detection
             if '測試' in text:
                 alert = '%s說了關鍵字' % user_name
+                # Send message to Kafka
                 producer.send('test_topic', bytes(alert, encoding='utf-8'))
 
             print(text)
